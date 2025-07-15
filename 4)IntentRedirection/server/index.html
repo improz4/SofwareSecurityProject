@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proteggi la tua privacy</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f4f8;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,123,255,0.4);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    p {
+      margin-top: 40px;
+      color: #555;
+      max-width: 300px;
+      text-align: center;
+    }
+    #activityInfo {
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+	  font-size: 1.5; 
+
+    }
+  </style>
+</head>
+<body>
+  <div id="activityInfo"></div>
+  <script>
+    alert("Attacco andato a buon fine!");
+
+    const userAgent = navigator.userAgent || "";
+    const isAndroid = userAgent.includes("Android");
+    const isInsecureShopUA = userAgent.includes("insecureshop");
+
+    let activityName = "Unknown";
+    
+    if (isAndroid) {
+      if (userAgent.includes("Galaxy Nexus Build/JRO03C")) {
+        activityName = "PrivateActivity (confermato tramite User Agent)";
+      } else {
+        activityName = "Probabile PrivateActivity (WebView non protetta)";
+      }
+    }
+
+    document.getElementById("activityInfo").innerHTML = 
+      `Sei in: <strong>${activityName}</strong><br>
+       Intent Redirection sfruttato con successo!`;
+  </script>
+</body>
+</html>
